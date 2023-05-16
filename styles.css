@@ -53,6 +53,8 @@ table {
 	border-spacing: 0;
 }
 
+/* END RESET CUSTOM CSS BEGINS */
+
 body{
   background-color: #A9907E;
 }
@@ -93,7 +95,7 @@ body{
   display: flex;
   flex-direction: column;
   padding: 25px 10px;
-  border: 2px solid black;
+  border: 2px solid #4C4B16;
   width: 20%;
   align-items: center;
   gap: 10px;

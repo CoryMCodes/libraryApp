@@ -11,13 +11,14 @@ const Book = {
     this.rating = rating
     return this;
   },
-  buildCard: function(){
+  buildCard: function(id){
     // get container
     let container = document.getElementById("card-container");
     
     // create card el
     let card = document.createElement("div");
     card.classList.add("card");
+    card.setAttribute("card-index", id)
 
     // assign card info using create text node rather than setting innerHTMl to avoid
     // malicious code being inserted
@@ -75,7 +76,9 @@ newBookForm.addEventListener('submit', (e) => {
   //reset form
   newBookForm.reset();
 
+  // add book object to library array
   addBookToLibrary(newBook);
+  // update view with new library
   buildLibrary(library);
   document.getElementById("addModal").classList.toggle("hidden");
 })
@@ -87,8 +90,8 @@ addBookToLibrary(Lotr);
 // build library view
 const buildLibrary = (array) => {
   clearContainer();
-  array.forEach(book => {
-    book.buildCard();
+  array.forEach((book, index) => {
+    book.buildCard(index);
   });
 }
 
