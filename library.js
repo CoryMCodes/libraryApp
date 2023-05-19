@@ -11,6 +11,10 @@ const Book = {
     this.rating = rating
     return this;
   },
+  toggleRead: function(){
+    this.hasRead = !this.hasRead;
+    return `${this.hasRead ? `Read` : `Not Read`}`
+  },
   buildCard: function(id){
     // get container
     let container = document.getElementById("card-container");
@@ -24,7 +28,6 @@ const Book = {
     xImg.classList.add("grow");
     xImg.setAttribute("card-index", id)
     xImg.addEventListener("click", deleteBookFromLibrary);
-
     card.appendChild(xImg);
     // assign card info using create text node rather than setting innerHTMl to avoid
     // malicious code being inserted
@@ -45,8 +48,7 @@ const Book = {
     hasReadInput.setAttribute("type", "checkbox")
     hasReadInput.setAttribute("name", "hasRead");
     hasReadInput.onchange = () => {
-      this.hasRead = !this.hasRead;
-      hasReadLabel.innerText = `${this.hasRead ? `Read` : `Not Read`}`;
+      hasReadLabel.innerText = this.toggleRead();
     }
     hasReadDiv.appendChild(hasReadInput);
     let ratingDiv = document.createElement("div");
