@@ -18,8 +18,14 @@ const Book = {
     // create card el
     let card = document.createElement("div");
     card.classList.add("card");
-    card.setAttribute("card-index", id)
+    // Add X img and attach delete function to it.
+    let xImg = document.createElement("img");
+    xImg.classList.add("xImage");
+    xImg.classList.add("grow");
+    xImg.setAttribute("card-index", id)
+    xImg.addEventListener("click", deleteBookFromLibrary);
 
+    card.appendChild(xImg);
     // assign card info using create text node rather than setting innerHTMl to avoid
     // malicious code being inserted
      let titleDiv = document.createElement("div");
@@ -57,6 +63,12 @@ function addBookToLibrary(Book) {
   library.push(Book);
 }
 
+// Delete Book From Library (attached to button on card)
+function deleteBookFromLibrary(e){
+  let cardIndex = e.target.getAttribute("card-index")
+  library.splice(cardIndex,1);
+  buildLibrary(library);
+}
 
 // button that shows new book modal
 const addBookBtn = document.getElementById("addBookBtn");
@@ -95,4 +107,5 @@ const buildLibrary = (array) => {
   });
 }
 
+// Build first view on page load
 buildLibrary(library);

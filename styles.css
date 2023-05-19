@@ -54,12 +54,26 @@ table {
 }
 
 /* END RESET CUSTOM CSS BEGINS */
-
 body{
   background-color: #A9907E;
 }
 .hidden{
   display: none;
+}
+
+.xImage{
+ content: url(../assets/x-symbol-svgrepo-com.svg);
+ width: 10px;
+ margin-left: auto;
+ cursor: pointer;
+ padding: 5px; 
+}
+
+.grow{
+  transition: all .2s ease-in-out;
+}
+.grow:hover{
+  transform: scale(1.5);
 }
 
 .header{
@@ -91,10 +105,25 @@ body{
   font-size: 1.5rem;
 }
 
+#addBookBtn:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#addBookBtn:hover::before{
+  content: "+ "
+}
+#addBookBtn:hover::after{
+  content: " +";
+}
+
 .card{
   display: flex;
   flex-direction: column;
-  padding: 25px 10px;
+  padding-bottom: 25px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   border: 2px solid #4C4B16;
   width: 20%;
   align-items: center;
