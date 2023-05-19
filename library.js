@@ -35,8 +35,20 @@ const Book = {
     authorDiv.appendChild(document.createTextNode(`${this.author}`));
     let pagesDiv = document.createElement("div");
     pagesDiv.appendChild(document.createTextNode(`${this.pages}`))
+    // Has Read CheckBox Functionality 
     let hasReadDiv = document.createElement("div");
-    hasReadDiv.appendChild(document.createTextNode(`${this.hasRead ? `Read` : `Not Read`}`))
+    let hasReadLabel = document.createElement("label");
+    hasReadLabel.setAttribute("for", "hasRead");
+    hasReadLabel.appendChild(document.createTextNode(`${this.hasRead ? `Read` : `Not Read`}`))
+    hasReadDiv.appendChild(hasReadLabel);
+    let hasReadInput = document.createElement('input');
+    hasReadInput.setAttribute("type", "checkbox")
+    hasReadInput.setAttribute("name", "hasRead");
+    hasReadInput.onchange = () => {
+      this.hasRead = !this.hasRead;
+      hasReadLabel.innerText = `${this.hasRead ? `Read` : `Not Read`}`;
+    }
+    hasReadDiv.appendChild(hasReadInput);
     let ratingDiv = document.createElement("div");
     ratingDiv.appendChild(document.createTextNode(`${this.rating}`));
 
