@@ -18,17 +18,38 @@
   <div id="card-container">
 
   </div>
+  <div class="hidden" id="addModal">
+    <div>
+      Add New Book
+    </div>
+    <form id="newBookForm">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title">
+      <label for="author">Author</label>
+      <input type="text" name="author" id="author">
+      <label for="pages">Pages</label>
+      <input type="text" name="pages" id="pages">
+      <div>
+        <div>Rating:</div>
+        <input type="radio" id="one-rating" name="rating" value="1">
+        <label for="one-rating">1</label>
+        <input type="radio" id="two-rating" name="rating" value="2">
+        <label for="two-rating">2</label>
+        <input type="radio" id="three-rating" name="rating" value="3">
+        <label for="three-rating">3</label>
+        <input type="radio" id="four-rating" name="rating" value="4">
+        <label for="four-rating">4</label>
+        <input type="radio" id="five-rating" name="rating" value="5">
+        <label for="five-rating">5</label>
+      </div>
+      <div>
+        <label for="initHasRead">Read?</label>
+        <input type="checkbox" name="initHasRead" id="initHasRead">
+      </div>
+      
+      <button  id="submitBook" type="submit">Submit</button>
+    </form>
+  </div>
 </body>
-<div class="hidden" id="addModal">
-  <form id="newBookForm">
-    <label for="Title">Title</label>
-    <input type="text" name="title" id="title">
-    <label for="author">Author</label>
-    <input type="text" name="author" id="author">
-    <label for="pages">Pages</label>
-    <input type="text" name="pages" id="pages">
-    <button id="submitBook" type="submit">Submit</button>
-  </form>
 
-</div>
 </html>

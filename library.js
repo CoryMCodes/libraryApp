@@ -37,7 +37,7 @@ const Book = {
     let authorDiv = document.createElement("div");
     authorDiv.appendChild(document.createTextNode(`${this.author}`));
     let pagesDiv = document.createElement("div");
-    pagesDiv.appendChild(document.createTextNode(`${this.pages}`))
+    pagesDiv.appendChild(document.createTextNode(`Pages: ${this.pages}`))
     // Has Read CheckBox Functionality 
     let hasReadDiv = document.createElement("div");
     let hasReadLabel = document.createElement("label");
@@ -52,7 +52,7 @@ const Book = {
     }
     hasReadDiv.appendChild(hasReadInput);
     let ratingDiv = document.createElement("div");
-    ratingDiv.appendChild(document.createTextNode(`${this.rating}`));
+    ratingDiv.appendChild(document.createTextNode(`Rating: ${this.rating}/5`));
 
     // build card
     card.appendChild(titleDiv);
