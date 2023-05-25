@@ -22,6 +22,7 @@ const Book = {
     // create card el
     let card = document.createElement("div");
     card.classList.add("card");
+    
     // Add X img and attach delete function to it.
     let xImg = document.createElement("img");
     xImg.classList.add("xImage");
@@ -29,6 +30,7 @@ const Book = {
     xImg.setAttribute("card-index", id)
     xImg.addEventListener("click", deleteBookFromLibrary);
     card.appendChild(xImg);
+    
     // assign card info using create text node rather than setting innerHTMl to avoid
     // malicious code being inserted
      let titleDiv = document.createElement("div");
@@ -38,19 +40,26 @@ const Book = {
     authorDiv.appendChild(document.createTextNode(`${this.author}`));
     let pagesDiv = document.createElement("div");
     pagesDiv.appendChild(document.createTextNode(`Pages: ${this.pages}`))
+    
     // Has Read CheckBox Functionality 
     let hasReadDiv = document.createElement("div");
     let hasReadLabel = document.createElement("label");
     hasReadLabel.setAttribute("for", "hasRead");
     hasReadLabel.appendChild(document.createTextNode(`${this.hasRead ? `Read` : `Not Read`}`))
-    hasReadDiv.appendChild(hasReadLabel);
+    hasReadLabel.classList.add("checkbox-label")
+    //hasReadDiv.appendChild(hasReadLabel);
     let hasReadInput = document.createElement('input');
-    hasReadInput.setAttribute("type", "checkbox")
+    hasReadInput.setAttribute("type", "checkbox");
     hasReadInput.setAttribute("name", "hasRead");
+    hasReadInput.classList.add("cardCheck");
+    // set hasRead input to checked if initial value is true
+    this.hasRead ? hasReadInput.setAttribute("checked", "") : null;
+    // toggle read status on object if user interacts with checkbox input
     hasReadInput.onchange = () => {
       hasReadLabel.innerText = this.toggleRead();
+      hasReadLabel.appendChild(hasReadInput);
     }
-    hasReadDiv.appendChild(hasReadInput);
+    hasReadLabel.appendChild(hasReadInput);
     let ratingDiv = document.createElement("div");
     ratingDiv.appendChild(document.createTextNode(`Rating: ${this.rating}/5`));
 
@@ -59,7 +68,7 @@ const Book = {
     card.appendChild(authorDiv);
     card.appendChild(pagesDiv);
     card.appendChild(ratingDiv);
-    card.appendChild(hasReadDiv);
+    card.appendChild(hasReadLabel);
 
     // append card to container
     container.appendChild(card);
@@ -90,6 +99,13 @@ addBookBtn.addEventListener('click', () => {
   document.getElementById("addModal").classList.toggle("hidden")
 })
 
+const cancelBtn = document.getElementById("cancelBtn");
+cancelBtn.addEventListener('click', (e) =>{
+  e.preventDefault();
+  document.getElementById("addModal").classList.toggle("hidden");
+  newBookForm.reset();
+})
+
 // get form - listen for submit, build new book object and rebuild library view
 let newBookForm = document.getElementById("newBookForm");
 newBookForm.addEventListener('submit', (e) => {
@@ -97,7 +113,9 @@ newBookForm.addEventListener('submit', (e) => {
   let title = newBookForm.elements["title"].value;
   let author = newBookForm.elements["author"].value;
   let pages = newBookForm.elements["pages"].value;
-  let newBook = Object.create(Book).init(title, author, pages, false, 5);
+  let hasRead = newBookForm.elements["initHasRead"].value;
+  let rating = newBookForm.elements["rating"].value;
+  let newBook = Object.create(Book).init(title, author, pages, hasRead, rating);
 
   //reset form
   newBookForm.reset();

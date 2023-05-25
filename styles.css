@@ -89,6 +89,7 @@ body{
   display:flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 15px;
 }
 
 #card-container {
@@ -111,6 +112,8 @@ body{
     ". . . ."
     ". . . ."
     ". . . ."; 
+
+  justify-items: center;
 }
 
 #addBookBtn{
@@ -135,21 +138,19 @@ body{
 }
 
 .card{
-  display: flex;
   font-family: 'Playfair Display', serif;
-  gap: 10px;
   font-size: 1.5rem;
   flex-direction: column;
   border: 1px solid #CFB53B;
-  width: 20%;
   align-items: center;
-  gap: 10px;
   border-radius: 10px;
-  background-color: #697D7A
-  /*rgb(31,60,32)*/;
-  width: 100%;
+  background-color: #697D7A;
+  width: 90%;
   color: #CFB53B;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 #addModal{
@@ -180,4 +181,86 @@ body{
 
 #newBookForm input{
   margin-bottom: 15px;
+}
+
+/* Checkbox Styling */
+
+.checkbox-label{
+  display: grid;
+  grid-template-columns: 100px auto;
+  gap: 5px;
+  justify-items: right;
+}
+
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color:#CFB53B ;
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-radius: 0.15em;
+  margin-left: 6px;
+  transform: translateY(3px);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  box-shadow: inset 1em 1em #697D7A;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+}
+
+input[type="checkbox"].cardCheck{
+  background-color: #697D7A;
+}
+
+input[type="checkbox"].cardCheck::before{
+  box-shadow: inset 1em 1em #CFB53B;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.formBtn{
+  background-color: #CFB53B;
+  border: 2px rgb(11,9,8) solid;
+  border-radius: 10px;
+  font-family: 'Alegreya Sans SC', sans-serif;
+  color: rgb(11,9,8);
+  font-size: 1.5rem;
+}
+
+.formBtn:hover{
+  background-color: #697D7A;
+  color: #CFB53B;
+  cursor: pointer;
+}
+
+.formBtn:last-of-type{
+  margin-top: 6px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

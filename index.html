@@ -28,7 +28,7 @@
       <label for="author">Author</label>
       <input type="text" name="author" id="author">
       <label for="pages">Pages</label>
-      <input type="text" name="pages" id="pages">
+      <input type="number" name="pages" id="pages">
       <div>
         <div>Rating:</div>
         <input type="radio" id="one-rating" name="rating" value="1">
@@ -42,12 +42,11 @@
         <input type="radio" id="five-rating" name="rating" value="5">
         <label for="five-rating">5</label>
       </div>
-      <div>
-        <label for="initHasRead">Read?</label>
+      <label class="checkbox-label" for="initHasRead">Read?
         <input type="checkbox" name="initHasRead" id="initHasRead">
-      </div>
-      
-      <button  id="submitBook" type="submit">Submit</button>
+      </label>
+      <button class="formBtn"  id="submitBook" type="submit">Submit</button>
+      <button class="formBtn"  id="cancelBtn" >Cancel</button>
     </form>
   </div>
 </body>
