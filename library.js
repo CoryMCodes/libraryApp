@@ -1,21 +1,18 @@
 // Library Storage
 let library = [];
 
-// Book Object
-const Book = {
-  init: function(title, author, pages, hasRead, rating){
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.hasRead = hasRead
-    this.rating = rating
-    return this;
-  },
-  toggleRead: function(){
-    this.hasRead = !this.hasRead;
-    return `${this.hasRead ? `Read` : `Not Read`}`
-  },
-  buildCard: function(id){
+
+//Book Factory Function
+const bookFactory = (title, author, pages, hasRead, rating) => {
+  
+  //private function to toggle read state and view
+  const toggleRead = () => {
+    hasRead = !hasRead;
+    return `${hasRead ? `Read` : `Not Read`}`
+  }
+
+  //public function to build book card view
+  const buildCard = (id) => {
     // get container
     let container = document.getElementById("card-container");
     
@@ -35,33 +32,31 @@ const Book = {
     // malicious code being inserted
      let titleDiv = document.createElement("div");
     titleDiv.classList.add('card-title');
-    titleDiv.appendChild(document.createTextNode(`"${this.title}"`));
+    titleDiv.appendChild(document.createTextNode(`"${title}"`));
     let authorDiv = document.createElement("div");
-    authorDiv.appendChild(document.createTextNode(`${this.author}`));
+    authorDiv.appendChild(document.createTextNode(`${author}`));
     let pagesDiv = document.createElement("div");
-    pagesDiv.appendChild(document.createTextNode(`Pages: ${this.pages}`))
+    pagesDiv.appendChild(document.createTextNode(`Pages: ${pages}`))
     
     // Has Read CheckBox Functionality 
-    let hasReadDiv = document.createElement("div");
     let hasReadLabel = document.createElement("label");
     hasReadLabel.setAttribute("for", "hasRead");
-    hasReadLabel.appendChild(document.createTextNode(`${this.hasRead ? `Read` : `Not Read`}`))
+    hasReadLabel.appendChild(document.createTextNode(`${hasRead ? `Read` : `Not Read`}`))
     hasReadLabel.classList.add("checkbox-label")
-    //hasReadDiv.appendChild(hasReadLabel);
     let hasReadInput = document.createElement('input');
     hasReadInput.setAttribute("type", "checkbox");
     hasReadInput.setAttribute("name", "hasRead");
     hasReadInput.classList.add("cardCheck");
     // set hasRead input to checked if initial value is true
-    this.hasRead ? hasReadInput.setAttribute("checked", "") : null;
+    hasRead ? hasReadInput.setAttribute("checked", "") : null;
     // toggle read status on object if user interacts with checkbox input
     hasReadInput.onchange = () => {
-      hasReadLabel.innerText = this.toggleRead();
+      hasReadLabel.innerText = toggleRead();
       hasReadLabel.appendChild(hasReadInput);
     }
     hasReadLabel.appendChild(hasReadInput);
     let ratingDiv = document.createElement("div");
-    ratingDiv.appendChild(document.createTextNode(`Rating: ${this.rating}/5`));
+    ratingDiv.appendChild(document.createTextNode(`Rating: ${rating}/5`));
 
     // build card
     card.appendChild(titleDiv);
@@ -73,6 +68,10 @@ const Book = {
     // append card to container
     container.appendChild(card);
   }
+
+  // return only function to build card element, all other information is private
+  // to book object
+return {buildCard}
 }
 
 // helper function to clear container before rebuild
@@ -115,7 +114,7 @@ newBookForm.addEventListener('submit', (e) => {
   let pages = newBookForm.elements["pages"].value;
   let hasRead = newBookForm.elements["initHasRead"].value;
   let rating = newBookForm.elements["rating"].value;
-  let newBook = Object.create(Book).init(title, author, pages, hasRead, rating);
+  let newBook = bookFactory(title, author, pages, hasRead, rating);
 
   //reset form
   newBookForm.reset();
@@ -128,7 +127,7 @@ newBookForm.addEventListener('submit', (e) => {
 })
 
 // Add First Book Manually
-const Lotr = Object.create(Book).init("Lord of the Rings", "Tolkien", 150, false, 5);
+const Lotr = bookFactory("Lord of the Rings", "Tolkien", 150, false, 5);
 addBookToLibrary(Lotr);
 
 // build library view
